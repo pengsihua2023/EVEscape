@@ -1,5 +1,11 @@
 # EVEscape
 # 这个研究很重要
+[病毒大流行的早期预警系统——EVEscape](病毒大流行的早期预警系统——EVEscape)  
+
+[病毒突变也能被预测！AI新模型EVEscape或成新冠预言家](https://new.qq.com/rain/a/20231016A08UHT00)  
+
+[B站 视频 论文解读](https://www.bilibili.com/video/BV1zC4y1J7um/?spm_id_from=333.337.search-card.all.click)  
+
 This is the official code repository for the paper ["Learning from pre-pandemic data to forecast viral escape"](https://www.nature.com/articles/s41586-023-06617-0). This paper is a joint collaboration between the [Marks Lab](https://www.deboramarkslab.com/) and the [OATML group](https://oatml.cs.ox.ac.uk/).
 
 ## Overview
