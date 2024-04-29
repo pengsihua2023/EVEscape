@@ -1,6 +1,6 @@
 # EVEscape
 # 这个研究很重要
-[病毒大流行的早期预警系统——EVEscape](病毒大流行的早期预警系统——EVEscape)  
+[病毒大流行的早期预警系统——EVEscape](https://baijiahao.baidu.com/s?id=1779525016746730905&wfr=spider&for=pc)  
 
 [病毒突变也能被预测！AI新模型EVEscape或成新冠预言家](https://new.qq.com/rain/a/20231016A08UHT00)  
 
