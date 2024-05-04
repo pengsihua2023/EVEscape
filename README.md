@@ -50,7 +50,7 @@ rm escape_dms_data_20220109.zip
 ## Generating EVE scores
 We leverage the original [EVE codebase](https://github.com/OATML-Markslab/EVE) to compute the evolutionary indices used in EVEscape.
 
-### Model training
+### Model training （第一步）
 The MSAs used to train the EVE models used in this project can be found in the supplemental material of the paper (Data S1). 
 
 We modify the Bayesian VAE [training script](https://github.com/OATML-Markslab/EVE/blob/master/train_VAE.py) to support the following hyperparameter choices in the [MSA_processing](https://github.com/OATML-Markslab/EVE/blob/master/utils/data_utils.py) call:
@@ -60,7 +60,7 @@ We modify the Bayesian VAE [training script](https://github.com/OATML-Markslab/E
 
 We train 5 independent models with different random seeds.
 
-### Model scoring
+### Model scoring（第二步）
 For the 5 independently-trained models, we compute [evolutionary indices](https://github.com/OATML-Markslab/EVE/blob/master/compute_evol_indices.py) sampling 20k times from the approximate posterior distribution (ie., num_samples_compute_evol_indices=20000). We then average the resulting scores across the 5 models to obtain the final EVE scores used in EVEscape.
 
 ### Model checkpoints
