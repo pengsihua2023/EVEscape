@@ -10,7 +10,7 @@ from seq_utils import *
 # General Paths
 ##############################################
 
-# AA properties ()
+# AA properties () 通用数据
 
 aa_charge_hydro = '../data/aa_properties/dissimilarity_metrics.csv'
 
