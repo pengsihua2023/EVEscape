@@ -172,7 +172,7 @@ nipahf_target_seq_path = '../data/sequences/FUS_NIPAV.fasta'
 ##############################################
 # Data Processing Functions
 ##############################################
-
+## 5月5日看到这里
 
 def process_eve_smm(eve_path):
     '''
