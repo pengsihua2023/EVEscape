@@ -19,8 +19,8 @@ aa_charge_hydro = '../data/aa_properties/dissimilarity_metrics.csv'
 ##############################################
 
 # Experimental data
-h1_replication = '../data/experiments/doud2016/Doud2016_h1_replication.csv'
-h1_escape = '../data/experiments/doud2018/DMS_Doud2018_H1-WSN33_antibodies.csv'
+h1_replication = '../data/experiments/doud2016/Doud2016_h1_replication.csv' ## 复制水平变化实验数据
+h1_escape = '../data/experiments/doud2018/DMS_Doud2018_H1-WSN33_antibodies.csv' ## 抗体逃逸变化水平实验数据
 h1_experiment_range = (1, 565)
 
 # Models
