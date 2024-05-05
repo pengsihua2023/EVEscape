@@ -10,7 +10,7 @@ from seq_utils import *
 # General Paths
 ##############################################
 
-# AA properties () 通用数据
+# AA properties () 通用数据：疏水性，电荷，BLOSUM62在突变前后的差异
 
 aa_charge_hydro = '../data/aa_properties/dissimilarity_metrics.csv'
 
