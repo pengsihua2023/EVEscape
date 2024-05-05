@@ -12,7 +12,7 @@ from seq_utils import *
 
 # AA properties () 通用数据：疏水性，电荷，BLOSUM62在突变前后的差异
 
-aa_charge_hydro = '../data/aa_properties/dissimilarity_metrics.csv'
+aa_charge_hydro = '../data/aa_properties/dissimilarity_metrics.csv' 
 
 ##############################################
 # Flu Paths
@@ -24,7 +24,7 @@ h1_escape = '../data/experiments/doud2018/DMS_Doud2018_H1-WSN33_antibodies.csv' 
 h1_experiment_range = (1, 565)
 
 # Models
-h1_eve = '../results/evol_indices/I4EPC4_t0.95_b0.1_evol_indices.csv'
+h1_eve = '../results/evol_indices/I4EPC4_t0.95_b0.1_evol_indices.csv'  ##进化指数数据（已经计算得到）
 
 # Structure data
 
@@ -45,7 +45,7 @@ bg505_escape = '../data/experiments/dingens2019/DMS_Dingens2019a_hiv_env_antibod
 bg505_experiment_range = (30, 699)
 
 # Models
-bg505_eve = '../results/evol_indices/Q2N0S5_20-709_b0.1_evol_indices.csv'
+bg505_eve = '../results/evol_indices/Q2N0S5_20-709_b0.1_evol_indices.csv'  ##进化指数数据（已经计算得到）
 
 # Structure data
 bg505_structure_list = [{
@@ -76,7 +76,7 @@ rbd_studies_to_drop = ['2021_Greaney_B1351']
 rbd_experiment_range = (331, 531)
 
 # Models
-rbd_eve_pre2020 = '../results/evol_indices/P0DTC2_321-541_sc0.5_cc0.3_b0.3_pre2020_evol_indices.csv'
+rbd_eve_pre2020 = '../results/evol_indices/P0DTC2_321-541_sc0.5_cc0.3_b0.3_pre2020_evol_indices.csv'  ##进化指数数据（已经计算得到）
 
 # Structure data
 rbd_structure_list = [{
@@ -117,14 +117,14 @@ spike_target_seq_path = '../data/sequences/SPIKE_SARS2.fasta'
 spike_experiment_range = (1, 1273)
 
 # Models
-spike_eve_pre2020 = '../results/evol_indices/P0DTC2_sc0.5_cc0.3_b0.1_pre2020_evol_indices.csv'
+spike_eve_pre2020 = '../results/evol_indices/P0DTC2_sc0.5_cc0.3_b0.1_pre2020_evol_indices.csv'  ##进化指数数据（已经计算得到）
 
 ##############################################
 # Lassavirus Paths
 ##############################################
 
 # Models
-lassa_eve = '../results/evol_indices/GLYC_LASSJ_b0.05_theta_0.01_22oct14_20000_samples_No_distances_singles_22oct17.csv'
+lassa_eve = '../results/evol_indices/GLYC_LASSJ_b0.05_theta_0.01_22oct14_20000_samples_No_distances_singles_22oct17.csv'   ##进化指数数据（已经计算得到）
 
 # Structure data
 
@@ -142,7 +142,7 @@ lassa_experiment_range = (59, 491) #signal peptide is 1-58
 ##############################################
 
 # Models
-nipahg_eve = '../results/evol_indices/GLYCP_NIPAV_b0.05_theta_0.01_22oct14_20000_samples_No_distances_singles_22oct17.csv'
+nipahg_eve = '../results/evol_indices/GLYCP_NIPAV_b0.05_theta_0.01_22oct14_20000_samples_No_distances_singles_22oct17.csv'  ##进化指数数据（已经计算得到）
 
 # Structure data
 
@@ -158,7 +158,7 @@ nipahg_target_seq_path = '../data/sequences/GLYCP_NIPAV.fasta'
 ##############################################
 
 # Models
-nipahf_eve = '../results/evol_indices/FUS_NIPAV_b0.05_theta_0.01_22oct14_20000_samples_No_distances_singles_22oct17.csv'
+nipahf_eve = '../results/evol_indices/FUS_NIPAV_b0.05_theta_0.01_22oct14_20000_samples_No_distances_singles_22oct17.csv'  ##进化指数数据（已经计算得到）
 
 # Structure data
 
