@@ -19,11 +19,12 @@ rbd_xie_thresh = 0.90
 ##############################################
 #Read processed experiments and components scores
 ##############################################
-
+# 提取flu数据
 flu = pd.read_csv("../results/summaries/h1_experiments_and_scores.csv")
 flu_ablist = [col for col in flu.columns.values if "mutfracsurvive" in col]
 flu_all_ab = [col for col in flu.columns.values if "mutfracsurvive" in col]
 
+# 提取hiv数据
 hiv = pd.read_csv("../results/summaries/bg505_experiments_and_scores.csv")
 hiv_ablist = [
     col for col in hiv.columns.values
@@ -31,6 +32,7 @@ hiv_ablist = [
 ]
 hiv_all_ab = [col for col in hiv.columns.values if "mutfracsurvive" in col]
 
+# 提取rbd数据
 rbd = pd.read_csv("../results/summaries/rbd_experiments_and_scores.csv")
 rbd_ablist = [
     col for col in rbd.columns.values if "escape_" in col and "_Bloom" in col
@@ -40,13 +42,17 @@ rbd_xie_ablist = [
     col for col in rbd.columns.values if "escape_" in col and "_Xie" in col
 ]
 
+# 提取spike数据
 spike = pd.read_csv("../results/summaries/spike_scores.csv")
 rbd_all_ab = [col for col in rbd.columns.values if "escape_" in col]
 
+# 提取lassa数据
 lassa = pd.read_csv('../results/summaries/lassa_glycoprotein_scores.csv')
 
+# 提取nipahg数据
 nipahg = pd.read_csv('../results/summaries/nipah_glycoprotein_scores.csv')
 
+# 提取nipahf数据
 nipahf = pd.read_csv('../results/summaries/nipah_fusion_scores.csv')
 
 ##############################################
