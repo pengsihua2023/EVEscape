@@ -16,9 +16,9 @@ hiv_thresh = 0.138
 rbd_thresh = 0.57
 rbd_xie_thresh = 0.90
 
-##############################################
+#####################################################
 #Read processed experiments and components scores
-##############################################
+#####################################################
 # 提取flu数据
 flu = pd.read_csv("../results/summaries/h1_experiments_and_scores.csv")
 flu_ablist = [col for col in flu.columns.values if "mutfracsurvive" in col]
@@ -55,20 +55,20 @@ nipahg = pd.read_csv('../results/summaries/nipah_glycoprotein_scores.csv')
 # 提取nipahf数据
 nipahf = pd.read_csv('../results/summaries/nipah_fusion_scores.csv')
 
-##############################################
+###################################################################
 #Functions to calculate EVEscape and aggregate/binarize experiments
-##############################################
+###################################################################
 
-
+# 定义了一个名为 logistic 的函数，它实现了逻辑斯蒂回归中的逻辑函数（Logistic function），也称为 Sigmoid 函数
 def logistic(x):
     return 1 / (1 + np.exp(-x))
 
-
+# 执行标准化处理（或称为 Z-score 标准化），主要目的是将数据转换为具有平均值为 0 和标准差为 1 的形式。
 def standardization(x):
     """Assumes input is numpy array or pandas series"""
     return (x - x.mean()) / x.std()
 
-
+## 做预测
 def make_predictors(summary_init, thresh, ablist, scores=True):
 
     summary = summary_init.copy()
@@ -190,9 +190,10 @@ nipahf.to_csv("../results/summaries_with_scores/nipah_fusion_evescape.csv",
               index=False)
 
 
-##############################################
+#######################################################################
 #Save Site-Level Summaries with EVEscape/binarized experimetnal escape
-##############################################
+#######################################################################
+# 将 make_site 函数应用于各自的数据集，生成了每个病原体或蛋白的位点级数据摘要，这些摘要反映了各个位点的平均特征，包括逃逸能力、突变效应等重要生物学信息。
 def make_site(summary_init):
 
     summary = summary_init.copy()
@@ -209,6 +210,7 @@ lassa_site = make_site(lassa)
 nipahg_site = make_site(nipahg)
 nipahf_site = make_site(nipahf)
 
+# 保存上面得到的数据
 flu_site.to_csv('../results/summaries_with_scores/flu_h1_evescape_sites.csv',
                 index=False)
 hiv_site.to_csv('../results/summaries_with_scores/hiv_env_evescape_sites.csv',
