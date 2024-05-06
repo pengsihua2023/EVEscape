@@ -173,7 +173,7 @@ nipahf_target_seq_path = '../data/sequences/FUS_NIPAV.fasta'
 # Data Processing Functions
 ##############################################
 ## 5月5日看到这里
-
+## 提取进化指数结果文件中的数据
 def process_eve_smm(eve_path):
     '''
     Processes EVE single mutation matrix table
@@ -190,7 +190,7 @@ def process_eve_smm(eve_path):
     eve = eve.drop(columns=to_drop)
     return eve
 
-
+## 将进化向量编码（EVE）的预测结果与实验数据表合并
 def add_model_outputs(exps, eve_path):
     '''
     Merges EVE predictions on to experimental data table
@@ -200,13 +200,13 @@ def add_model_outputs(exps, eve_path):
                       how='outer')
     return exps
 
-
+# 计算蛋白质结构中的加权接触数（WCN, Weighted Contact Number）并将这些信息合并到实验数据表中
 def get_wcn(exps, pdb_path, trimer_chains, target_chains, map_table):
     '''
     Computes weighted contact number by alpha-carbon and sidechain 
     center of mass and merges on to experimental data table
     '''
-
+# 使用 add_wcn_to_site_annotations 函数根据 PDB 文件和三聚体链的信息计算加权接触数。这涉及到蛋白质结构的 alpha-carbon 和侧链的质心。
     wcn = add_wcn_to_site_annotations(pdb_path, ''.join(trimer_chains))
     wcn = wcn.rename(columns={'pdb_position': 'i', 'pdb_aa': 'wt'})
     wcn['i'] = wcn.i.apply(lambda x: alphanumeric_index_to_numeric_index(x)
@@ -223,7 +223,7 @@ def get_wcn(exps, pdb_path, trimer_chains, target_chains, map_table):
     exps = exps.drop(columns=['wcn_bfil', 'wcn_ffil'])
     return exps
 
-
+# 将氨基酸的疏水性和电荷差异的标准化数据合并到实验数据表中，并计算两者的综合分数
 def hydrophobicity_charge(exps, table):
 
     props = pd.read_csv(table, index_col=0)
@@ -241,7 +241,7 @@ def hydrophobicity_charge(exps, table):
     exps = exps.drop(columns=['eisenberg_weiss_diff_std', 'charge_diff_std'])
     return exps
 
-
+# 通过野生型的值将实验变量进行标准化处理，这有助于消除基线差异，使不同的实验数据点可以在相同的基准下进行比较，进而分析突变的效果。
 def norm_to_wt(df, prefvar):
     '''
     Normalize experimental variables to wildtype (for "prefs" style data) 
@@ -257,7 +257,7 @@ def norm_to_wt(df, prefvar):
     df[newvar] = df[prefvar]
     df = df.groupby(['i', 'wt']).apply(grp_func)
     return df
-
+# 整理和存储与 RBD 实验条件相关的元数据，同时为特定实验室的分析提供便捷的文本文件，从而支持数据的进一步处理和分析。
 def rbd_metadata(escape_df, bloom_path, xie_path, metadata_path):
     escape = escape_df[['condition','condition_type',
                         'condition_subtype','condition_year',
