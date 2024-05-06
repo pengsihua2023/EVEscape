@@ -279,7 +279,7 @@ def rbd_metadata(escape_df, bloom_path, xie_path, metadata_path):
 # Summary workbook functions
 ##############################################
 
-
+# 整合和处理针对 H1N1 流感病毒的实验数据和模型预测结果，并且关联这些数据到蛋白质结构信息
 def load_H1():
 
     # Read in and combine experimental data
@@ -317,7 +317,7 @@ def load_H1():
 
     return data, map_table
 
-
+# 整合和处理针对 HIV-1 BG505 病毒的实验数据和模型预测结果，并且关联这些数据到蛋白质结构信息
 def load_bg505():
 
     # Read in and combine experimental data
@@ -379,7 +379,7 @@ def load_bg505():
 
     return data, map_table_dict
 
-
+# 加载和处理与 SARS-CoV-2 的受体结合域（RBD）相关的实验数据，并将这些数据与预测模型和蛋白质结构信息整合
 def load_rbd():
 
     # Read in and combine experimental data
@@ -485,7 +485,7 @@ def load_rbd():
 
     return data, map_table_dict
 
-
+# 加载和处理 SARS-CoV-2 Spike 蛋白的相关数据，并且将其与结构数据及预测模型输出整合
 def load_spike():
 
     # Make starting dataframe
@@ -531,7 +531,7 @@ def load_spike():
 
     return data, map_table_dict
 
-
+# 加载和处理拉沙热病毒（Lassa virus）的序列突变数据，并将其与结构和模型预测数据结合
 def load_lassa():
     data = make_mut_table(lassa_target_seq_path)
 
@@ -558,7 +558,7 @@ def load_lassa():
 
     return data, map_table
 
-
+# 加载和处理与尼帕病毒(Nipah virus)糖蛋白相关的突变数据，并将其与模型预测结果及结构分析数据整合
 def load_nipahg():
     data = make_mut_table(nipahg_target_seq_path)
 
@@ -599,7 +599,7 @@ def load_nipahg():
 
     return data, map_table_dict
 
-
+# 加载和处理尼帕病毒融合蛋白（Nipah virus fusion protein, F protein）的突变数据
 def load_nipahf():
     data = make_mut_table(nipahf_target_seq_path)
 
@@ -621,10 +621,11 @@ def load_nipahf():
     data = data.sort_values(['i', 'mut'])
 
     return data, map_table
-
+# 加载H1实验数据
 h1, _ = load_H1()
 h1.to_csv('../results/summaries/h1_experiments_and_scores.csv', index=False)
 
+# 加载bg505实验数据
 bg505, _ = load_bg505()
 bg505.to_csv('../results/summaries/bg505_experiments_and_scores.csv',
              index=False)
