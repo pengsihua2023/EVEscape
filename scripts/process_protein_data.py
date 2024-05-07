@@ -6,6 +6,64 @@ from Bio.PDB import PDBParser
 from weighted_contact_number import *
 from seq_utils import *
 
+```
+这段代码涉及到多种生物数据的处理，包括病毒复制和突变数据的读取与分析。具体到输入和输出文件：
+
+### 输入数据文件：
+1. **通用数据**：
+   - `dissimilarity_metrics.csv`：包含氨基酸属性（如疏水性和电荷）。
+
+2. **流感（H1N1）数据**：
+   - `Doud2016_h1_replication.csv`：实验数据，包含H1N1病毒的复制水平变化。
+   - `DMS_Doud2018_H1-WSN33_antibodies.csv`：包含抗体逃逸水平的实验数据。
+   - `I4EPC4_t0.95_b0.1_evol_indices.csv`：进化指数数据。
+   - `1rvx_no_HETATM.pdb`：蛋白质结构数据。
+   - `A0A2Z5U3Z0_9INFA.fasta`：目标序列数据。
+
+3. **HIV数据**：
+   - `DMS_Haddox2018_hiv_BG505_env_replication_pref.csv`：HIV病毒BG505株的复制偏好数据。
+   - `DMS_Dingens2019a_hiv_env_antibodies_x10.csv`：抗体逃逸实验数据。
+   - `Q2N0S5_20-709_b0.1_evol_indices.csv`：进化指数数据。
+   - `5FYL_Env_trimer.pdb` 和 `7tfo_env.pdb`：HIV病毒的结构数据。
+   - `Q2N0S6_9HIV1.fasta`：HIV病毒的目标序列数据。
+
+4. **SARS-CoV-2 RBD数据**：
+   - `Starr2020_rbd_bind_expr.csv` 和 `escape_data_20220109.csv`：SARS-CoV-2 RBD的绑定表达数据和逃逸数据。
+   - `abf1738_processed_data_file_from_deep_mutagenesis_of_sars-cov-2_protein_s.xlsx`：Chan实验室的数据。
+   - `P0DTC2_321-541_sc0.5_cc0.3_b0.3_pre2020_evol_indices.csv`：进化指数数据。
+   - `6vxx.pdb`、`6vyb.pdb`、`7bnn.pdb`、`7cab.pdb`：结构数据。
+   - `SPIKE_SARS2.fasta`：目标序列数据。
+
+5. **SARS-CoV-2 Spike数据**：
+   - 使用与RBD相同的结构数据和目标序列数据。
+   - `P0DTC2_sc0.5_cc0.3_b0.1_pre2020_evol_indices.csv`：进化指数数据。
+
+6. **拉沙热病毒数据**：
+   - `GLYC_LASSJ_b0.05_theta_0.01_22oct14_20000_samples_No_distances_singles_22oct17.csv`：进化指数数据。
+   - `7puy_no_hetatm.pdb`：结构数据。
+   - `GLYC_LASSJ.fasta`：目标序列数据。
+
+7. **尼帕病毒数据**：
+   - `GLYCP_NIPAV_b0.05_theta_0.01_22oct14_20000_samples_No_distances_singles_22oct17.csv` 和 `FUS_NIPAV_b0.05_theta_0.01_22oct14_20000_samples_No_distances_singles_22oct17.csv`：进化指数数据。
+   - `7tyo_7txz_no_hetatm.pdb` 和 `5evm_no_hetatm.pdb`：结构数据。
+   - `GLYCP_NIPAV.fasta` 和 `FUS_NIPAV.fasta`：目标序列数据。
+
+### 输出数据文件：
+1. `h1_experiments_and_scores.csv`：整合后的H1N1实验数据和分数。
+2. `bg505_experiments_and_scores.csv`：整合后的HIV BG505实验数据和分数。
+3. `rbd_experiments_and_scores.csv`：整合后的SARS-CoV-2 RBD实验
+
+数据和分数。
+4. `spike_scores.csv`：整合后的SARS-CoV-2 Spike蛋白数据和分数。
+5. `lassa_glycoprotein_scores.csv`：整合后的拉沙热病毒数据和分数。
+6. `nipah_glycoprotein_scores.csv` 和 `nipah_fusion_scores.csv`：整合后的尼帕病毒糖蛋白和融合蛋白数据和分数。
+
+这些文件被用于进一步的数据分析和科研研究。
+
+```
+
+
+
 ##############################################
 # General Paths
 ##############################################
