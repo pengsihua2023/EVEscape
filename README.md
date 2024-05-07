@@ -25,8 +25,8 @@ We also provide EVEscape scores for all single mutation variants of SARS-CoV-2 S
 ## Scripts
 The scripts folder contains python scripts to calculate EVEscape scores for all single mutations and aggregate available deep mutational scanning data for SARS-CoV-2 RBD, Flu HA, HIV Env, Lassa glycoprotein, and Nipah fusion and glycoproteins from [data](/data). 
 Specifically this includes the following two scripts:
- - [process_protein_data.py](scripts/process_protein_data.py) calculates the three EVEscape components 
- - [evescape_scores.py](scripts/evescape_scores.py) creates the final evescape scores and outputs scores and processed DMS data in [summaries_with_scores](./results/summaries_with_scores)
+ - [process_protein_data.py](scripts/process_protein_data.py) calculates the three EVEscape components 整合进化指数和实验数据，归一化等处理  
+ - [evescape_scores.py](scripts/evescape_scores.py) creates the final evescape scores and outputs scores and processed DMS data in [summaries_with_scores](./results/summaries_with_scores) 得到计算结果  
  
  The scripts folder also contains a python script [score_pandemic_strains.py](scripts/score_pandemic_strains.py) to calculate EVEscape scores for all strains in GISAID. The output strain scores (~150MB unzipped) can be downloaded as follows:
  ```
