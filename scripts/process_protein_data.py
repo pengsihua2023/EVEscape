@@ -627,22 +627,27 @@ def load_nipahf():
 h1, _ = load_H1()
 h1.to_csv('../results/summaries/h1_experiments_and_scores.csv', index=False)
 
-# 加载bg505实验数据
+# 加载bg505实验数据，下一行保存结果，结果文件倒数第二列就是免疫逃逸结果
 bg505, _ = load_bg505()
 bg505.to_csv('../results/summaries/bg505_experiments_and_scores.csv',
              index=False)
 
+# 加载rbd实验数据，下一行保存结果，结果文件倒数第二列就是免疫逃逸结果
 rbd, _ = load_rbd()
 rbd.to_csv('../results/summaries/rbd_experiments_and_scores.csv', index=False)
 
+# 加载spike实验数据，下一行保存结果，结果文件倒数第二列就是免疫逃逸结果
 spike, _ = load_spike()
 spike.to_csv('../results/summaries/spike_scores.csv', index=False)
 
+# 加载lassa实验数据，下一行保存结果，结果文件倒数第二列就是免疫逃逸结果
 lassa, _ = load_lassa()
 lassa.to_csv('../results/summaries/lassa_glycoprotein_scores.csv', index=False)
 
+# 加载nipahg实验数据，下一行保存结果，结果文件倒数第二列就是免疫逃逸结果
 nipahg, _ = load_nipahg()
 nipahg.to_csv('../results/summaries/nipah_glycoprotein_scores.csv', index=False)
 
+# 加载nipahf实验数据，下一行保存结果，结果文件倒数第二列就是免疫逃逸结果
 nipahf, _ = load_nipahf()
 nipahf.to_csv('../results/summaries/nipah_fusion_scores.csv', index=False)
