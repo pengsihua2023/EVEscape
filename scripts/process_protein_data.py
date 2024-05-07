@@ -49,9 +49,7 @@ from seq_utils import *
 ### 输出数据文件：
 1. `h1_experiments_and_scores.csv`：整合后的H1N1实验数据和分数。
 2. `bg505_experiments_and_scores.csv`：整合后的HIV BG505实验数据和分数。
-3. `rbd_experiments_and_scores.csv`：整合后的SARS-CoV-2 RBD实验
-
-数据和分数。
+3. `rbd_experiments_and_scores.csv`：整合后的SARS-CoV-2 RBD实验数据和分数。
 4. `spike_scores.csv`：整合后的SARS-CoV-2 Spike蛋白数据和分数。
 5. `lassa_glycoprotein_scores.csv`：整合后的拉沙热病毒数据和分数。
 6. `nipah_glycoprotein_scores.csv` 和 `nipah_fusion_scores.csv`：整合后的尼帕病毒糖蛋白和融合蛋白数据和分数。
