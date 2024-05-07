@@ -7,8 +7,6 @@ from weighted_contact_number import *
 from seq_utils import *
 
 '''
-这段代码涉及到多种生物数据的处理，包括病毒复制和突变数据的读取与分析。具体到输入和输出文件：
-
 ### 输入数据文件：
 1. **通用数据**：
    - `dissimilarity_metrics.csv`：包含氨基酸属性（如疏水性和电荷）。
