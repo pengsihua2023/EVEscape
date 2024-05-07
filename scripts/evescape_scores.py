@@ -170,9 +170,10 @@ rbd_all = rbd_all.drop(columns="Naive Freq")
 evescape = rbd_all.pop("evescape")
 rbd_all.insert(10, "evescape", evescape)
 
-##############################################
+##############################################################
 #Save Summaries with EVEscape/binarized experimetnal escape
-##############################################
+##############################################################
+## 这个就是结果数据
 flu.to_csv("../results/summaries_with_scores/flu_h1_evescape.csv", index=False)
 hiv.to_csv("../results/summaries_with_scores/hiv_env_evescape.csv",
            index=False)
