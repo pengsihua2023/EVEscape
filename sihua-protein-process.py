@@ -72,12 +72,6 @@ bg505_target_seq_path = '../data/sequences/Q2N0S6_9HIV1.fasta'
 # SARS2 Spike Paths
 ##############################################
 
-spike_target_seq_path = '../data/sequences/SPIKE_SARS2.fasta'
-spike_experiment_range = (1, 1273)
-
-# Models
-spike_eve_pre2020 = '../results/evol_indices/P0DTC2_sc0.5_cc0.3_b0.1_pre2020_evol_indices.csv'  ##进化指数数据（已经计算得到）
-
 ##############################################
 # Lassavirus Paths
 ##############################################
@@ -217,23 +211,6 @@ def norm_to_wt(df, prefvar):
     df = df.groupby(['i', 'wt']).apply(grp_func)
     return df
 # 整理和存储与 RBD 实验条件相关的元数据，同时为特定实验室的分析提供便捷的文本文件，从而支持数据的进一步处理和分析。
-def rbd_metadata(escape_df, bloom_path, xie_path, metadata_path):
-    escape = escape_df[['condition','condition_type',
-                        'condition_subtype','condition_year',
-                        'eliciting_virus','study',
-                        'lab']].drop_duplicates()
-    with open(xie_path, "w") as textfile:
-        for element in escape[
-                          (escape.lab=='Xie_XS')].condition.tolist():
-            textfile.write(element + "\n")
-    with open(bloom_path, "w") as textfile:
-        for element in escape[
-                          (escape.lab=='Bloom_JD')].condition.tolist():
-            textfile.write(element + "\n")
-    escape.to_csv(metadata_path)
-    return(escape)
-
-
 ##############################################
 # Summary workbook functions
 ##############################################
@@ -339,157 +316,9 @@ def load_bg505():
     return data, map_table_dict
 
 # 加载和处理与 SARS-CoV-2 的受体结合域（RBD）相关的实验数据，并将这些数据与预测模型和蛋白质结构信息整合
-def load_rbd():
 
-    # Read in and combine experimental data
-    escape = pd.read_csv(rbd_escape)
-    escape = escape[~escape.study.isin(rbd_studies_to_drop)]
-    escape['condition'] = ('escape_' + escape['condition'] + '_' +
-                           escape['lab'].str.split('_').str[0])
-    
-    _ = rbd_metadata(escape, bloom_ab_list, xie_ab_list, rbd_ab_metadata)
-    
-    escape = escape[[
-        'condition', 'site', 'wildtype', 'mutation', 'mut_escape'
-    ]]
-
-    escape = pd.pivot_table(
-        escape,
-        index=['site', 'wildtype', 'mutation'],
-        columns="condition",
-        values="mut_escape").reset_index().rename_axis(None).rename_axis(
-            None, axis=1)
-
-    escape = escape.rename(columns={
-        'site': 'i',
-        'wildtype': 'wt',
-        'mutation': 'mut'
-    })
-    escape = escape.fillna(0)
-
-    rep = pd.read_csv(rbd_replication)
-    rep = rep.rename(columns={
-        'bind_avg': 'rbd_ace2_binding',
-        'expr_avg': 'rbd_expression'
-    })
-
-    data = escape.merge(
-        rep[['wt', 'mut', 'i', 'rbd_ace2_binding', 'rbd_expression']],
-        on=['wt', 'mut', 'i'],
-        how='outer')
-
-    #chan data
-    chan = pd.read_excel(
-        '../data/experiments/chan2020/abf1738_processed_data_file_from_deep_mutagenesis_of_sars-cov-2_protein_s.xlsx',
-        skiprows=8)
-
-    chan['Unnamed: 0'] = chan['Unnamed: 0'].ffill()
-    chan['WT a.a.'] = chan['WT a.a.'].ffill()
-    chan['Position #'] = chan['Position #'].ffill()
-    chan = chan[chan.Mutation != '*']
-    chan = chan.drop(columns=[
-        'Unnamed: 0', 'WT-specific 1', 'WT-specific 2', 'v2.4-specific 1',
-        'v2.4-specific 2'
-    ])
-    chan['chan_expression'] = chan['ACE2-High'] + chan['ACE2-Low']
-    chan['chan_ace2_binding'] = chan['ACE2-High']
-    chan = chan.drop(columns=['ACE2-High', 'ACE2-Low'])
-    chan = chan.rename(columns={
-        'WT a.a.': 'wt',
-        'Position #': 'i',
-        'Mutation': 'mut'
-    })
-
-    data = data.merge(chan, how='left', on=['wt', 'i', 'mut'])
-
-    # Read in and combine model data
-    data = add_model_outputs(data, rbd_eve_pre2020)
-
-    # Get rid of wt data
-    data = data[data.wt != data.mut]
-
-    # Get mapping to PDB
-    # Add WCNs to dataframe
-    map_table_dict = {}
-
-    for struct in rbd_structure_list:
-
-        map_table = remap_pdb_seq_to_target_seq(struct['pdb_path'],
-                                                struct['chains'],
-                                                rbd_target_seq_path)
-
-        data = get_wcn(data, struct['pdb_path'], struct['trimer_chains'],
-                       struct['chains'], map_table)
-
-        data = data.rename(
-            columns={
-                'wcn_sc': 'wcn_sc_' + struct['name'],
-                'wcn_fill': 'wcn_fill_' + struct['name']
-            })
-
-        map_table_dict[struct['name']] = map_table
-
-    # Take min of structures
-    data['wcn_fill'] = data[[
-        col for col in data.columns if 'wcn_fill_' in col
-    ]].min(axis=1)
-
-    # Add aa properties to data
-    data = hydrophobicity_charge(data, aa_charge_hydro)
-    data = data.sort_values(['i', 'mut'])
-
-    # Drop any rows not in experiment
-    data = data[(data.i >= rbd_experiment_range[0])
-                & (data.i <= rbd_experiment_range[1])]
-
-    return data, map_table_dict
 
 # 加载和处理 SARS-CoV-2 Spike 蛋白的相关数据，并且将其与结构数据及预测模型输出整合
-def load_spike():
-
-    # Make starting dataframe
-    data = make_mut_table(spike_target_seq_path)
-
-    # Read in and combine pre-2020 model data
-    data = add_model_outputs(data, spike_eve_pre2020)
-
-    # Get rid of wt data
-    data = data[data.wt != data.mut]
-
-    # Get mapping to PDB
-    # Add WCNs to dataframe
-    map_table_dict = {}
-
-    for struct in rbd_structure_list:
-
-        map_table = remap_pdb_seq_to_target_seq(struct['pdb_path'],
-                                                struct['chains'],
-                                                spike_target_seq_path)
-        data = get_wcn(data, struct['pdb_path'], struct['trimer_chains'],
-                       struct['chains'], map_table)
-        data = data.rename(
-            columns={
-                'wcn_sc': 'wcn_sc_' + struct['name'],
-                'wcn_fill': 'wcn_fill_' + struct['name']
-            })
-
-        map_table_dict[struct['name']] = map_table
-
-    # Take min of structures
-    data['wcn_fill'] = data[[
-        col for col in data.columns if 'wcn_fill_' in col
-    ]].min(axis=1)
-
-    # Add aa properties to data
-    data = hydrophobicity_charge(data, aa_charge_hydro)
-    data = data.sort_values(['i', 'mut'])
-
-    # Drop any rows not in experiment
-    data = data[(data.i >= spike_experiment_range[0])
-                & (data.i <= spike_experiment_range[1])]
-
-    return data, map_table_dict
-
 # 加载和处理拉沙热病毒（Lassa virus）的序列突变数据，并将其与结构和模型预测数据结合
 def load_lassa():
     data = make_mut_table(lassa_target_seq_path)
@@ -588,10 +417,6 @@ h1.to_csv('../results/summaries/h1_experiments_and_scores.csv', index=False)
 bg505, _ = load_bg505()
 bg505.to_csv('../results/summaries/bg505_experiments_and_scores.csv',
              index=False)
-
-# 加载spike实验数据
-spike, _ = load_spike()
-spike.to_csv('../results/summaries/spike_scores.csv', index=False)
 
 # 加载lassa实验数据
 lassa, _ = load_lassa()
