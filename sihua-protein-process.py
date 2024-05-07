@@ -68,49 +68,6 @@ bg505_target_seq_path = '../data/sequences/Q2N0S6_9HIV1.fasta'
 # SARS2 RBD Paths
 ##############################################
 
-# Experimental data
-rbd_replication = '../data/experiments/starr2020/Starr2020_rbd_bind_expr.csv'
-rbd_escape = '../data/experiments/bloom_rbd_escape/aggregate_raw_data_strains.csv'
-rbd_chan = '../data/experiments/chan2020/abf1738_processed_data_file_from_deep_mutagenesis_of_sars-cov-2_protein_s.xlsx'
-rbd_studies_to_drop = ['2021_Greaney_B1351']
-
-# 认为rbd区域有201个氨基酸，从331-531.
-rbd_experiment_range = (331, 531)
-
-# Models
-rbd_eve_pre2020 = '../results/evol_indices/P0DTC2_321-541_sc0.5_cc0.3_b0.3_pre2020_evol_indices.csv'  ##进化指数数据（已经计算得到）
-
-# Structure data
-rbd_structure_list = [{
-    'name': '6VXX',
-    'chains': ['A'],
-    'trimer_chains': ['A', 'B', 'C'],
-    'pdb_path': '../data/structures/6vxx.pdb'
-}, {
-    'name': '6VYB',
-    'chains': ['B'],
-    'trimer_chains': ['A', 'B', 'C'],
-    'pdb_path': '../data/structures/6vyb.pdb'
-}, {
-    'name': '7BNN',
-    'chains': ['B'],
-    'trimer_chains': ['A', 'B', 'C'],
-    'pdb_path': '../data/structures/7bnn.pdb'
-}, {
-    'name': '7CAB',
-    'chains': ['A'],
-    'trimer_chains': ['A', 'B', 'C'],
-    'pdb_path': '../data/structures/7cab.pdb'
-}]
-
-rbd_target_seq_path = '../data/sequences/SPIKE_SARS2.fasta'
-
-## RBD metadata save paths ##
-
-bloom_ab_list = '../data/antibody_properties/Bloom_abs_to_use.txt'
-xie_ab_list = '../data/antibody_properties/Xie_abs_to_use.txt'
-rbd_ab_metadata = '../data/antibody_properties/rbd_antibody_metadata.csv'
-
 ##############################################
 # SARS2 Spike Paths
 ##############################################
@@ -631,10 +588,6 @@ h1.to_csv('../results/summaries/h1_experiments_and_scores.csv', index=False)
 bg505, _ = load_bg505()
 bg505.to_csv('../results/summaries/bg505_experiments_and_scores.csv',
              index=False)
-
-# 加载rbd实验数据
-rbd, _ = load_rbd()
-rbd.to_csv('../results/summaries/rbd_experiments_and_scores.csv', index=False)
 
 # 加载spike实验数据
 spike, _ = load_spike()
