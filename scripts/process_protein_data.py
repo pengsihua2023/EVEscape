@@ -73,6 +73,7 @@ rbd_replication = '../data/experiments/starr2020/Starr2020_rbd_bind_expr.csv'
 rbd_escape = '../data/experiments/bloom_rbd_escape/escape_data_20220109.csv'
 rbd_chan = '../data/experiments/chan2020/abf1738_processed_data_file_from_deep_mutagenesis_of_sars-cov-2_protein_s.xlsx'
 rbd_studies_to_drop = ['2021_Greaney_B1351']
+
 # 认为rbd区域有201个氨基酸，从331-531.
 rbd_experiment_range = (331, 531)
 
